@@ -294,7 +294,12 @@ void reportAvailableMemoryForGPUImage(NSString *tag)
 
 - (CGImageRef)newCGImageByFilteringCGImage:(CGImageRef)imageToFilter;
 {
-    GPUImagePicture *stillImageSource = [[GPUImagePicture alloc] initWithCGImage:imageToFilter];
+	return [self newCGImageByFilteringCGImage:imageToFilter removePremultiplication:NO];
+}
+
+- (CGImageRef)newCGImageByFilteringCGImage:(CGImageRef)imageToFilter removePremultiplication:(BOOL)removePremultiplication;
+{
+    GPUImagePicture *stillImageSource = [[GPUImagePicture alloc] initWithCGImage:imageToFilter removePremultiplication:removePremultiplication];
     
     [self useNextFrameForImageCapture];
     [stillImageSource addTarget:(id<GPUImageInput>)self];
@@ -353,7 +358,12 @@ void reportAvailableMemoryForGPUImage(NSString *tag)
 
 - (UIImage *)imageByFilteringImage:(UIImage *)imageToFilter;
 {
-    CGImageRef image = [self newCGImageByFilteringCGImage:[imageToFilter CGImage]];
+    return [self imageByFilteringImage:imageToFilter removePremultiplication:NO];
+}
+
+- (UIImage *)imageByFilteringImage:(UIImage *)imageToFilter removePremultiplication:(BOOL)removePremultiplication;
+{
+    CGImageRef image = [self newCGImageByFilteringCGImage:[imageToFilter CGImage] removePremultiplication:removePremultiplication];
     UIImage *processedImage = [UIImage imageWithCGImage:image scale:[imageToFilter scale] orientation:[imageToFilter imageOrientation]];
     CGImageRelease(image);
     return processedImage;
@@ -382,7 +392,12 @@ void reportAvailableMemoryForGPUImage(NSString *tag)
 
 - (NSImage *)imageByFilteringImage:(NSImage *)imageToFilter;
 {
-    CGImageRef image = [self newCGImageByFilteringCGImage:[imageToFilter CGImageForProposedRect:NULL context:[NSGraphicsContext currentContext] hints:nil]];
+    return [self imageByFilteringImage:imageToFilter removePremultiplication:NO];
+}
+
+- (NSImage *)imageByFilteringImage:(NSImage *)imageToFilter removePremultiplication:(BOOL)removePremultiplication;
+{
+    CGImageRef image = [self newCGImageByFilteringCGImage:[imageToFilter CGImageForProposedRect:NULL context:[NSGraphicsContext currentContext] hints:nil] removePremultiplication:removePremultiplication];
     NSImage *processedImage = [[NSImage alloc] initWithCGImage:image size:NSZeroSize];
     CGImageRelease(image);
     return processedImage;

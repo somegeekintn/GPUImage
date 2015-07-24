@@ -107,6 +107,7 @@ void reportAvailableMemoryForGPUImage(NSString *tag);
 - (void)useNextFrameForImageCapture;
 - (CGImageRef)newCGImageFromCurrentlyProcessedOutput;
 - (CGImageRef)newCGImageByFilteringCGImage:(CGImageRef)imageToFilter;
+- (CGImageRef)newCGImageByFilteringCGImage:(CGImageRef)imageToFilter removePremultiplication:(BOOL)removePremultiplication;
 
 // Platform-specific image output methods
 // If you're trying to use these methods, remember that you need to set -useNextFrameForImageCapture before running -processImage or running video and calling any of these methods, or you will get a nil image
@@ -114,11 +115,13 @@ void reportAvailableMemoryForGPUImage(NSString *tag);
 - (UIImage *)imageFromCurrentFramebuffer;
 - (UIImage *)imageFromCurrentFramebufferWithOrientation:(UIImageOrientation)imageOrientation;
 - (UIImage *)imageByFilteringImage:(UIImage *)imageToFilter;
+- (UIImage *)imageByFilteringImage:(UIImage *)imageToFilter removePremultiplication:(BOOL)removePremultiplication;
 - (CGImageRef)newCGImageByFilteringImage:(UIImage *)imageToFilter;
 #else
 - (NSImage *)imageFromCurrentFramebuffer;
 - (NSImage *)imageFromCurrentFramebufferWithOrientation:(UIImageOrientation)imageOrientation;
 - (NSImage *)imageByFilteringImage:(NSImage *)imageToFilter;
+- (NSImage *)imageByFilteringImage:(NSImage *)imageToFilter removePremultiplication:(BOOL)removePremultiplication;
 - (CGImageRef)newCGImageByFilteringImage:(NSImage *)imageToFilter;
 #endif
 
