@@ -65,6 +65,7 @@ typedef struct GPUMatrix3x3 GPUMatrix3x3;
     dispatch_semaphore_t imageCaptureSemaphore;
 }
 
+@property(nonatomic, strong) GLProgram *p_filterProgram;
 @property(readonly) CVPixelBufferRef renderTarget;
 @property(readwrite, nonatomic) BOOL preventRendering;
 @property(readwrite, nonatomic) BOOL currentlyReceivingMonochromeInput;

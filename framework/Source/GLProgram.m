@@ -34,7 +34,6 @@ typedef void (*GLLogFunction) (GLuint program, GLsizei bufsize, GLsizei* length,
         _initialized = NO;
         
         attributes = [[NSMutableArray alloc] init];
-        uniforms = [[NSMutableArray alloc] init];
         program = glCreateProgram();
         
         if (![self compileShader:&vertShader 
@@ -157,7 +156,7 @@ typedef void (*GLLogFunction) (GLuint program, GLsizei bufsize, GLsizei* length,
 {
     return (GLuint)[attributes indexOfObject:attributeName];
 }
-- (GLuint)uniformIndex:(NSString *)uniformName
+- (GLint)uniformIndex:(NSString *)uniformName
 {
     return glGetUniformLocation(program, [uniformName UTF8String]);
 }

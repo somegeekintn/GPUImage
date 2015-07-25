@@ -16,7 +16,6 @@
 @interface GLProgram : NSObject 
 {
     NSMutableArray  *attributes;
-    NSMutableArray  *uniforms;
     GLuint          program,
 	vertShader, 
 	fragShader;	
@@ -35,7 +34,7 @@
             fragmentShaderFilename:(NSString *)fShaderFilename;
 - (void)addAttribute:(NSString *)attributeName;
 - (GLuint)attributeIndex:(NSString *)attributeName;
-- (GLuint)uniformIndex:(NSString *)uniformName;
+- (GLint)uniformIndex:(NSString *)uniformName;
 - (BOOL)link;
 - (void)use;
 - (void)validate;
